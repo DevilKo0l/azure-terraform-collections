@@ -27,6 +27,6 @@ locals {
 
   os_type                   = coalesce(try(var.app_config["environments"][var.asset_tag]["web"]["farm"]["$(var.suffix)"]["os_type"],null),var.os_type)
   sku_name                  = coalesce(try(var.app_config["environments"][var.asset_tag]["web"]["farm"]["$(var.suffix)"]["sku_name"],null),var.sku_name)
-  sku_capacity              = coalesce(try(var.app_config["environments"][var.asset_tag]["web"]["farm"]["$(var.suffix)"]["sku_capaciy"],null),var.sku_capacity)
+  worker_count              = coalesce(try(var.app_config["environments"][var.asset_tag]["web"]["farm"]["$(var.suffix)"]["sku_capacity"],null),var.sku_capacity)
   per_site_scaling_enabled  = coalesce(try(var.app_config["environments"][var.asset_tag]["web"]["farm"]["$(var.suffix)"]["per_site_scaling_enabled"],null),var.per_site_scaling_enabled)
 }
