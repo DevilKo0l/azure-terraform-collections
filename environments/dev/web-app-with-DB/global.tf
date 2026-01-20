@@ -13,13 +13,3 @@ variable "location" {
   type = string
   default = "westeurope"
 }
-
-variable "app_config" {
-  description = "The application configuration information required to compose resource names"
-  type = any
-}
-
-variable "diagnostics_config" {
-  description = "The diagnostic configuration information required to compsose resource names"
-  type = any  
-}

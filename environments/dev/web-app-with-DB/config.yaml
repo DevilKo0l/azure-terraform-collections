@@ -1,0 +1,29 @@
+name: "TEST"
+environments:
+  Web:
+    farms:
+      farm1:
+        suffix: "web"
+        sku_name: "B2"
+        os_type: "Windows"
+        apps:
+          web: #
+            type: "webapp"
+            os: "Windows"
+            stack: "dotnet"
+            dotnet_version: "v6.0"
+            app_settings:
+
+      farm2:
+        sku_name: "B1"
+        os_type: "linux"
+        apps:
+          windows:
+            app:
+              farm: "app"
+              vnet_integration_enabled: true
+              vnet_integration_id: "app"
+              use_32_bit_worker: false
+              allow_destroy: true
+              app_settings:
+                WEBSITE_ENABLE_SYNC_UPDATE_SITE: true
