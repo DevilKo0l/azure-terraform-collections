@@ -1,0 +1,9 @@
+environments:
+  E1234:
+    web:
+      farm:
+        app:
+          os_type: Linux
+          sku_name: P1v3
+          worker_count: 2
+          per_site_scaling_enabled: false
