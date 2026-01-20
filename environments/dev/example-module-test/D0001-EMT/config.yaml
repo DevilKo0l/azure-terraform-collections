@@ -1,0 +1,8 @@
+environments:
+  D0001-EMT:
+    web:
+      farm:
+        app:
+          sku_name: B1
+          worker_count: 1
+          os_type: Linux

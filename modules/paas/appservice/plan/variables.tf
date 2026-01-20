@@ -1,15 +1,3 @@
-variable "application_id" {
-  description = "Business/workload identifier (recommended). Example: D1234"
-  type        = string
-  default     = null
-}
-
-variable "environment" {
-  description = "Environment name, e.g. dev/qa/stg/prd. Optional if you derive from app id; recommended to pass explicitly from root."
-  type        = string
-  default     = null
-}
-
 variable "location" {
   description = "Azure region (e.g., westeurope)"
   type        = string
@@ -21,7 +9,7 @@ variable "resource_group_name" {
 }
 
 variable "suffix" {
-  description = "Suffix used for config override lookup + name uniqueness (e.g., app/api/worker)."
+  description = "Suffix used for config lookup and naming (app/api/worker)."
   type        = string
   default     = "app"
 }
@@ -60,12 +48,6 @@ variable "worker_count" {
   }
 }
 
-variable "sku_capacity" {
-  description = "Legacy alias for worker_count (deprecated)."
-  type        = number
-  default     = null
-}
-
 variable "per_site_scaling_enabled" {
   description = "Enable per-site scaling."
   type        = bool
@@ -82,4 +64,17 @@ variable "app_config" {
   description = "Decoded YAML config map. Root should yamldecode(file(...)) and pass it in."
   type        = map(any)
   default     = {}
+}
+
+# Optional escape hatches (recommended to keep, rarely used)
+variable "workload_folder_name" {
+  description = "Override workload folder name (default = basename(path.cwd)). Expected: D0001 / Q0001 / S0001 / P0001 (optional -ABC)."
+  type        = string
+  default     = null
+}
+
+variable "project_code_override" {
+  description = "Override derived project code (ABC). Default derives from project folder name axxx-bxx-cxxx => ABC."
+  type        = string
+  default     = null
 }

@@ -10,6 +10,6 @@ resource "azurerm_service_plan" "this" {
 
   tags = local.merged_tags
 
-  # Uncomment only if tags are managed externally
+  # Uncomment ONLY if tags are managed externally:
   # lifecycle { ignore_changes = [tags] }
 }
