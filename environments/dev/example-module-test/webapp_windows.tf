@@ -2,7 +2,7 @@ module "app_service_plan" {
   source = "../../../modules/paas/appservice/plan"
 
   location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = module.rg.name
 
   app_config = local.app_config
   tags       = local.common_tags

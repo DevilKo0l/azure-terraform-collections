@@ -1,3 +1,5 @@
 # Packages
 
 *.terraform
+*.lock.hcl
+*.backup
