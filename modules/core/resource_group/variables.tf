@@ -1,45 +1,42 @@
+variable "name" {
+  description = "Resource group name."
+  type        = string
+}
+
 variable "location" {
-  type        = string
-  description = "Azure region (e.g. westeurope)"
-}
-
-variable "name_prefix" {
-  type        = string
-  default     = "rg"
-}
-
-variable "workload_folder_name" {
-  description = "Workload folder id like D0001-ABC / Q0001-ABC / S0001-ABC / P0001-ABC"
+  description = "Azure region where the resource group will be created."
   type        = string
 }
 
 variable "tags" {
-  type    = map(string)
-  default = {}
+  description = "Tags applied to the resource group."
+  type        = map(string)
+  default     = {}
 }
 
-# --- NEW ---
-variable "lock_in_prod_only" {
-  description = "Automatically enable CanNotDelete lock only for prod (Pxxxx-*) workloads"
+variable "lock_enabled" {
+  description = "Whether to create a management lock on the resource group."
   type        = bool
-  default     = true
+  default     = false
 }
 
-# --- Optional manual override ---
-variable "lock_override" {
-  description = "Optional explicit lock override"
-  type = object({
-    enabled = bool
-    level   = string
-    notes   = string
-  })
-  default = null
+variable "lock_level" {
+  description = "Management lock level."
+  type        = string
+  default     = "CanNotDelete"
 
   validation {
-    condition = (
-      var.lock_override == null ||
-      contains(["CanNotDelete", "ReadOnly"], var.lock_override.level)
-    )
-    error_message = "lock_override.level must be CanNotDelete or ReadOnly."
+    condition = contains([
+      "CanNotDelete",
+      "ReadOnly"
+    ], var.lock_level)
+
+    error_message = "lock_level must be either 'CanNotDelete' or 'ReadOnly'."
   }
+}
+
+variable "lock_notes" {
+  description = "Notes associated with the management lock."
+  type        = string
+  default     = "Protected resource group managed by Terraform."
 }

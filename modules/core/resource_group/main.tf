@@ -1,13 +1,14 @@
 resource "azurerm_resource_group" "this" {
-  name     = local.name
+  name     = var.name
   location = var.location
-  tags     = local.merged_tags
+  tags     = local.tags
 }
 
-resource "azurerm_management_lock" "rg" {
-  count      = local.lock_enabled ? 1 : 0
+resource "azurerm_management_lock" "this" {
+  count = var.lock_enabled ? 1 : 0
+
   name       = "${azurerm_resource_group.this.name}-lock"
   scope      = azurerm_resource_group.this.id
-  lock_level = local.lock_level
-  notes      = local.lock_notes
+  lock_level = var.lock_level
+  notes      = var.lock_notes
 }
