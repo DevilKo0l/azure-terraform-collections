@@ -1,0 +1,29 @@
+version: 1
+
+environments:
+  D0001-EMT:
+    network:
+      nsg:
+        app:
+          security_rules:
+            allow_https_inbound:
+              priority: 100
+              direction: Inbound
+              access: Allow
+              protocol: Tcp
+              source_port_range: "*"
+              destination_port_range: "443"
+              source_address_prefix: Internet
+              destination_address_prefix: "*"
+        private_endpoint:
+          security_rules: {}
+    vnet:
+      subnets:
+        sn-web-integration:
+          address_prefixes:
+            - 10.10.1.0/24
+          nsg_key: app
+        sn-private-endpoint:
+          address_prefixes:
+            - 10.10.2.0/24
+          nsg_key: private_endpoint

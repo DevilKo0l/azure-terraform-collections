@@ -31,6 +31,12 @@ environments:
           sn-apimv1-internal-injection:
             address_prefixes:
               - 10.10.3.0/24
+    apim:
+      publisher_name: Platform Team
+      publisher_email: platform@example.com
+      sku_name: Developer_1
+      virtual_network_type: Internal
+      subnet_key: sn-apimv1-internal-injection
 
   T0001-EMT:
     web:
