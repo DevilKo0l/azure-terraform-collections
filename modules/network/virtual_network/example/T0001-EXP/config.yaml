@@ -1,0 +1,17 @@
+version: 1
+
+environments:
+  D0001-EMT:
+    network:
+      vnet:
+        address_space:
+          - 10.10.0.0/16
+
+        subnets:
+          app:
+            address_prefixes:
+              - 10.10.1.0/24
+
+          private_endpoint:
+            address_prefixes:
+              - 10.10.2.0/24
