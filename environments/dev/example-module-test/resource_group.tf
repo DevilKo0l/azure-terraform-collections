@@ -1,9 +1,10 @@
 module "rg" {
   source = "../../../modules/core/resource_group"
 
-  location             = var.location
-  workload_folder_name = local.workload_folder
+  name     = locals.resource_group_name
+  location = var.location
 
-  tags = local.common_tags
-  # lock_in_prod_only = true  # default, can omit
+  lock_enabled = locals.resource_group_lock_enabled
+
+  tags = locals.common_tags
 }

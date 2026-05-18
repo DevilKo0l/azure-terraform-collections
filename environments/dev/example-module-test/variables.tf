@@ -1,19 +1,19 @@
-variable "config_path" {
-  description = "Path (relative to this root stack) to the workload config.yaml. Example: configs/dev/D0001-ABC/config.yaml"
-  type        = string
-}
-
 variable "subscription_id" {
+  description = "Azure subscription ID."
   type        = string
-  description = "Azure subscription id to deploy into"
 }
 
 variable "location" {
-  description = "Azure region (e.g. westeurope)"
+  description = "Azure region."
   type        = string
 }
 
-variable "resource_group_name" {
-  description = "Resource group name (either pass it, or generate it in locals if you prefer)"
+variable "config_path" {
+  description = "Path to config.yaml."
+  type        = string
+}
+
+variable "target_workload" {
+  description = "Target workload key from config.yaml. Example: D0001-EMT."
   type        = string
 }
