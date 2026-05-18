@@ -1,5 +1,5 @@
 environments:
-  E1234:
+  T0001:
     web:
       farm:
         app:

@@ -1,34 +1,34 @@
 output "id" {
-  description = "App Service Plan ID"
+  description = "The ID of the App Service Plan."
   value       = azurerm_service_plan.this.id
 }
 
 output "name" {
-  description = "App Service Plan name"
+  description = "The name of the App Service Plan."
   value       = azurerm_service_plan.this.name
 }
 
-output "environment" {
-  description = "Derived environment (dev/qa/stg/prd)"
-  value       = local.environment
+output "location" {
+  description = "The location of the App Service Plan."
+  value       = azurerm_service_plan.this.location
 }
 
-output "project_code" {
-  description = "Derived project code (ABC)"
-  value       = local.project_code
+output "resource_group_name" {
+  description = "The resource group name of the App Service Plan."
+  value       = azurerm_service_plan.this.resource_group_name
 }
 
-output "workload_id" {
-  description = "Derived workload numeric id (0001)"
-  value       = local.number_id
+output "os_type" {
+  description = "The OS type of the App Service Plan."
+  value       = azurerm_service_plan.this.os_type
 }
 
 output "sku_name" {
-  description = "Resolved SKU name (after config overrides)"
-  value       = local.final_sku_name
+  description = "The SKU name of the App Service Plan."
+  value       = azurerm_service_plan.this.sku_name
 }
 
 output "worker_count" {
-  description = "Resolved worker count (after config overrides)"
-  value       = local.final_worker_count
+  description = "The worker count of the App Service Plan."
+  value       = azurerm_service_plan.this.worker_count
 }
