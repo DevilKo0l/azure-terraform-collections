@@ -1,18 +1,21 @@
-# Azure Terraform Collection
-
 <div align="center">
 
-<h3 align="center">Azure Terraform Collection</h3>
+  <h3 align="center">Azure Terraform Collection</h3>
 
-<p align="center">
-Opinionated, scalable Terraform modules for Azure workloads
-</p>
+  <p align="center">
+    Opinionated, scalable Terraform modules for Azure workloads
+    <br />
+    <a href="#"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="#">View Demo</a>   
+  </p>
 
 </div>
 
 ---
 
-# About The Project
+## About The Project
 
 This repository provides a structured and scalable way to build Azure infrastructure using Terraform.
 
@@ -44,7 +47,7 @@ This approach is designed to:
 
 ---
 
-# Architecture Overview
+### Architecture Overview
 
 Deployment flow:
 
@@ -73,17 +76,52 @@ Reusable modules only create Azure resources.
 
 ---
 
-# Built With
+### Module Design Principles
 
-Technologies used in this project:
+Reusable modules must:
 
-- Terraform
-- AzureRM Provider
-- Azure CLI
+- create Azure resources only
+- receive final values from the root stack
+- validate inputs
+- expose useful outputs
+- remain environment-agnostic
+
+Reusable modules must NOT:
+
+- read config.yaml
+- parse workload names
+- build enterprise naming
+- implement environment logic
+- know production policies
 
 ---
 
-# Repository Structure
+### Root Stack Responsibilities
+
+The root environment stack owns:
+
+- config.yaml parsing
+- workload selection
+- naming conventions
+- environment mapping
+- location mapping
+- shared tags
+- production policies
+- module orchestration
+
+---
+
+### Key Principles
+
+- `config.yaml` = workload settings
+- `target_workload` = deployment selector
+- `locals.global.tf` = platform identity + naming
+- modules = reusable Azure resources
+- modules remain environment-agnostic
+
+---
+
+### Repository Structure
 
 ```text
 azure-terraform-collection/
@@ -124,7 +162,7 @@ cd environments/dev/example-module-test
 
 ---
 
-# Workload Naming Convention
+### Workload Naming Convention
 
 Workloads follow this format:
 
@@ -158,7 +196,7 @@ The workload key is the source of truth for:
 
 ---
 
-# Configuration Model
+### Configuration Model
 
 Each deployment group contains a single `config.yaml`.
 
@@ -226,7 +264,7 @@ Those are managed by the Terraform platform.
 
 ---
 
-# Platform Naming Convention
+### Platform Naming Convention
 
 All resources are generated from a shared naming suffix:
 
@@ -250,7 +288,7 @@ Generated resource examples:
 
 ---
 
-# Production Safety
+### Production Safety
 
 Production workloads automatically receive additional protection.
 
@@ -270,9 +308,9 @@ This behavior is enforced automatically by the platform.
 
 ---
 
-# Getting Started
+## Getting Started
 
-## Prerequisites
+### Prerequisites
 
 Install the following:
 
@@ -294,9 +332,9 @@ az login --tenant "<TENANT_ID>"
 
 ---
 
-# Deployment
+### Deployment
 
-## 1. Go to the environment stack
+1. Go to the environment stack
 
 ```powershell
 cd environments/dev/example-module-test
@@ -304,7 +342,7 @@ cd environments/dev/example-module-test
 
 ---
 
-## 2. Create terraform.tfvars
+2. Create terraform.tfvars
 
 ```hcl
 subscription_id = "<YOUR_SUBSCRIPTION_ID>"
@@ -322,7 +360,7 @@ az account show --query id -o tsv
 
 ---
 
-## 3. Initialize Terraform
+3. Initialize Terraform
 
 ```powershell
 terraform init -reconfigure
@@ -330,7 +368,7 @@ terraform init -reconfigure
 
 ---
 
-## 4. Validate
+4. Validate
 
 ```powershell
 terraform validate
@@ -338,7 +376,7 @@ terraform validate
 
 ---
 
-## 5. Plan
+5. Plan
 
 ```powershell
 terraform plan
@@ -346,7 +384,7 @@ terraform plan
 
 ---
 
-## 6. Apply
+6. Apply
 
 ```powershell
 terraform apply
@@ -362,7 +400,7 @@ when prompted.
 
 ---
 
-# Example Deployment
+### Example Deployment
 
 Using:
 
@@ -373,19 +411,19 @@ target_workload = "D0001-EMT"
 
 Terraform creates:
 
-## Resource Group
+Resource Group
 
 ```text
 rg-dev-weu-EMT-0001
 ```
 
-## App Service Plan
+App Service Plan
 
 ```text
 asp-dev-weu-EMT-0001-app
 ```
 
-## Windows Web App
+Windows Web App
 
 ```text
 app-dev-weu-EMT-0001-web
@@ -393,7 +431,7 @@ app-dev-weu-EMT-0001-web
 
 ---
 
-# Deploy Another Environment
+#### Deploy Another Environment
 
 To deploy another workload, change only:
 
@@ -423,7 +461,7 @@ terraform apply
 
 ---
 
-# Common Terraform Commands
+#### Common Terraform Commands
 
 ```powershell
 terraform fmt
@@ -435,52 +473,7 @@ terraform destroy
 
 ---
 
-# Module Design Principles
-
-Reusable modules must:
-
-- create Azure resources only
-- receive final values from the root stack
-- validate inputs
-- expose useful outputs
-- remain environment-agnostic
-
-Reusable modules must NOT:
-
-- read config.yaml
-- parse workload names
-- build enterprise naming
-- implement environment logic
-- know production policies
-
----
-
-# Root Stack Responsibilities
-
-The root environment stack owns:
-
-- config.yaml parsing
-- workload selection
-- naming conventions
-- environment mapping
-- location mapping
-- shared tags
-- production policies
-- module orchestration
-
----
-
-# Key Principles
-
-- `config.yaml` = workload settings
-- `target_workload` = deployment selector
-- `locals.global.tf` = platform identity + naming
-- modules = reusable Azure resources
-- modules remain environment-agnostic
-
----
-
-# Roadmap
+## Roadmap
 
 - [x] Resource Group module
 - [x] App Service Plan module
@@ -497,7 +490,7 @@ The root environment stack owns:
 
 ---
 
-# Recommended Workflow
+## Recommended Workflow
 
 ```powershell
 terraform fmt
@@ -508,7 +501,7 @@ terraform apply
 
 ---
 
-# Notes
+## Notes
 
 If you are new to the platform:
 
