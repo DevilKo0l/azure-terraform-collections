@@ -28,6 +28,9 @@ environments:
           sn-private-endpoint:
             address_prefixes:
               - 10.10.2.0/24
+          sn-apimv1-internal-injection:
+            address_prefixes:
+              - 10.10.3.0/24
 
   T0001-EMT:
     web:

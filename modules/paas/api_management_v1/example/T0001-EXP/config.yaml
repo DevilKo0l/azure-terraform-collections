@@ -1,0 +1,24 @@
+version: 1
+
+environments:
+  D0001-EMT:
+    #none
+    apim:
+      publisher_name: Platform Team
+      publisher_email: platform@example.com
+      sku_name: Developer_1
+      virtual_network_type: None
+    #external vnet injection
+    apim2:
+      publisher_name: Platform Team
+      publisher_email: platform@example.com
+      sku_name: Developer_1
+      virtual_network_type: External
+      subnet_key: apim
+    #internal vnet injection
+    apim3:
+      publisher_name: Platform Team
+      publisher_email: platform@example.com
+      sku_name: Developer_1
+      virtual_network_type: Internal
+      subnet_key: apim
