@@ -483,6 +483,8 @@ terraform destroy
 - [ ] Function App module
 - [ ] Key Vault module
 - [ ] Storage Account module
+- [x] virtual network
+- [x] APIM v1
 - [ ] Monitoring / Diagnostics module
 - [ ] CI/CD pipeline examples
 - [ ] Policy & governance examples
