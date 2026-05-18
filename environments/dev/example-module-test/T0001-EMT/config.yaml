@@ -17,6 +17,17 @@ environments:
           minimum_tls_version: "1.2"
           app_settings:
             ASPNETCORE_ENVIRONMENT: Development
+    network:
+      vnet:
+        address_space:
+          - 10.10.0.0/16
+        subnets:
+          sn-web-integration:
+            address_prefixes:
+              - 10.10.1.0/24
+          sn-private-endpoint:
+            address_prefixes:
+              - 10.10.2.0/24
 
   T0001-EMT:
     web:
