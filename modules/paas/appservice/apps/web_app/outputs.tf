@@ -1,41 +1,31 @@
-locals {
-  id = try(
-    azurerm_windows_web_app.this[0].id,
-    try(azurerm_linux_web_app.this[0].id, null)
-  )
-
-  name = try(
-    azurerm_windows_web_app.this[0].name,
-    try(azurerm_linux_web_app.this[0].name, null)
-  )
-
-  hostname = try(
-    azurerm_windows_web_app.this[0].default_hostname,
-    try(azurerm_linux_web_app.this[0].default_hostname, null)
-  )
-
-  principal_id = try(
-    azurerm_windows_web_app.this[0].identity[0].principal_id,
-    try(azurerm_linux_web_app.this[0].identity[0].principal_id, null)
-  )
-}
-
 output "id" {
-  value       = local.id
-  description = "Web App resource ID"
+  description = "Web App ID."
+  value = coalesce(
+    try(azurerm_linux_web_app.this[0].id, null),
+    try(azurerm_windows_web_app.this[0].id, null)
+  )
 }
 
 output "name" {
-  value       = local.name
-  description = "Web App name"
+  description = "Web App name."
+  value = coalesce(
+    try(azurerm_linux_web_app.this[0].name, null),
+    try(azurerm_windows_web_app.this[0].name, null)
+  )
 }
 
 output "default_hostname" {
-  value       = local.hostname
-  description = "Default hostname"
+  description = "Default Web App hostname."
+  value = coalesce(
+    try(azurerm_linux_web_app.this[0].default_hostname, null),
+    try(azurerm_windows_web_app.this[0].default_hostname, null)
+  )
 }
 
 output "identity_principal_id" {
-  value       = local.principal_id
-  description = "Managed identity principal id (if enabled)"
+  description = "System-assigned identity principal ID."
+  value = coalesce(
+    try(azurerm_linux_web_app.this[0].identity[0].principal_id, null),
+    try(azurerm_windows_web_app.this[0].identity[0].principal_id, null)
+  )
 }
