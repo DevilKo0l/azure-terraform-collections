@@ -7,7 +7,7 @@ locals {
 
   config_file = var.config_path
 
-  config = fileexists(local.config_file) ? yamldecode(file(local.config_file)) : {}
+  config = yamldecode(file(local.config_file))
 
   workload_key = var.target_workload
 
@@ -24,10 +24,10 @@ locals {
   # ---------------------------------------------------------
   #
 
-workload_match = regexall(
-  "^([DTSP])([0-9]{4})-([A-Za-z0-9]+)$",
-  local.workload_key
-)[0]
+  workload_match = regexall(
+    "^([DTSP])([0-9]{4})-([A-Za-z0-9]+)$",
+    local.workload_key
+  )[0]
 
   env_code = local.workload_match[0]
 
@@ -57,8 +57,8 @@ workload_match = regexall(
   #
 
   location_short_map = {
-    westeurope   = "weu"
-    northeurope  = "neu"
+    westeurope    = "weu"
+    northeurope   = "neu"
     swedencentral = "swc"
   }
 

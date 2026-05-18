@@ -1,4 +1,4 @@
-locals {
+locals {  
   tags = merge(
     var.tags,
     {

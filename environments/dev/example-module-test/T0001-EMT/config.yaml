@@ -1,3 +1,4 @@
+version: 1
 environments:
   D0001-EMT:
     web:
@@ -5,4 +6,32 @@ environments:
         app:
           sku_name: B1
           worker_count: 1
-          os_type: Linux
+          os_type: Windows
+
+      app:
+        web:
+          deploy_type: code
+          https_only: true
+          always_on: true
+          ftps_state: Disabled
+          minimum_tls_version: "1.2"
+          app_settings:
+            ASPNETCORE_ENVIRONMENT: Development
+
+  T0001-EMT:
+    web:
+      farm:
+        app:
+          sku_name: B1
+          worker_count: 1
+          os_type: Windows
+
+      app:
+        web:
+          deploy_type: code
+          https_only: true
+          always_on: true
+          ftps_state: Disabled
+          minimum_tls_version: "1.2"
+          app_settings:
+            ASPNETCORE_ENVIRONMENT: Test
