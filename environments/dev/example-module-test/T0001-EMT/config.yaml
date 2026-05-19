@@ -18,6 +18,36 @@ environments:
           app_settings:
             ASPNETCORE_ENVIRONMENT: Development
     network:
+      nsg:
+        apim-internal:
+          security_rules:
+            sr-in-allow-mgt-apim:
+              priority: 100
+              direction: Inbound
+              access: Allow
+              protocol: Tcp
+              source_port_range: "*"
+              destination_port_range: "3443"
+              source_address_prefix: ApiManagement
+              destination_address_prefix: VirtualNetwork
+            sr-in-allow-load-balancer:
+              priority: 101
+              direction: Inbound
+              access: Allow
+              protocol: Tcp
+              source_port_range: "*"
+              destination_port_range: "6390"
+              source_address_prefix: AzureLoadBalancer
+              destination_address_prefix: VirtualNetwork
+            sr-out-allow-load-balancer:
+              priority: 100
+              direction: Outbound
+              access: Allow
+              protocol: Tcp
+              source_port_range: "*"
+              destination_port_range: "80"
+              source_address_prefix: VirtualNetwork
+              destination_address_prefix: Internet
       vnet:
         address_space:
           - 10.10.0.0/16
@@ -31,6 +61,7 @@ environments:
           sn-apimv1-internal-injection:
             address_prefixes:
               - 10.10.3.0/24
+            nsg_key: apim-internal
     apim:
       publisher_name: Platform Team
       publisher_email: platform@example.com
