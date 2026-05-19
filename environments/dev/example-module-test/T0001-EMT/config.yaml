@@ -62,6 +62,53 @@ environments:
             address_prefixes:
               - 10.10.3.0/24
             nsg_key: apim-internal
+          sn-virtual-machines:
+            address_prefixes:
+              - 10.10.4.0/24
+    compute:
+      vms:
+        linux-app-01:
+          role: app
+          os_type: linux
+          vm_size: Standard_B2s
+
+          subnet_name: sn-virtual-machines
+
+          admin_username: azureuser
+          disable_password_authentication: true
+          admin_ssh_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDmZ88HQV0XDEy2ccTcHnfruTPF1eDOyl+ikeVfSW+//ks6XifJFXDcjBWwUftokHvy0zQoLUGsit0zYcVb4w1LTdhmncadecxZ1GOVWbqCYAYdroo8JIxXmGJwTYKXAQB0b/9SNljOrGS1EItOvub9DJGJon3QcA8BeLWO/+qT7h2D1W66CL6HFfrtv0CWQQWWJjmgQvpHUZNrHxynIy00lj6Y379hfS5rHFer6wQWI/hUkol+mVzRcLUzQgJoNyPoH4dpIopIJKkg7henOeIi0/jpgntynGs3J3sjD64iSxC6KbY0o+cFWV7RowyjYOvvLS9AmCag/jITZsoSBQXEhI+SnrkVQTJDyaNlIjolOamXscrUbjaLcEgW6zdIKr/uzAhe/LtzUHLE3gfCOGn0HZDf+fbGbhnBp3uhtVzip9JgcuoKJ5OSihbd7lZGJuC4fXkKj1r0HKGYNtSa5GVyxdzmMC4TnCB7pZlz3cxJCARhEAUCMr2svM9qr3+8GAVrmnsjVwwMUftJ/C3agi/3Nh+q9NzaEIdsCchDBgdJcfPrW2+ruX6tqwR+2aza50LFjTz1xF2zIT6rQzj7efD/FPOO3+Ee+iT8UOK/IU2+UyI0YRf04/5XgVq0UDqNebyaPS1F6dL1buID5pt4Hyx6VwWqM0aRCTYXOtelHxVHHQ== azureuser"
+
+          create_public_ip: false
+
+          os_disk_storage_account_type: Standard_LRS
+          os_disk_size_gb: 64
+
+          source_image_reference:
+            publisher: Canonical
+            offer: 0001-com-ubuntu-server-jammy
+            sku: 22_04-lts
+            version: latest
+
+        windows-app-01:
+          role: app
+          os_type: windows
+          vm_size: Standard_B2ms
+
+          subnet_name: sn-virtual-machines
+
+          admin_username: azureadmin
+          admin_password: "ChangeMe123!ChangeMe123!"
+
+          create_public_ip: false
+
+          os_disk_storage_account_type: StandardSSD_LRS
+          os_disk_size_gb: 128
+
+          source_image_reference:
+            publisher: MicrosoftWindowsServer
+            offer: WindowsServer
+            sku: 2022-datacenter-azure-edition
+            version: latest
     apim:
       publisher_name: Platform Team
       publisher_email: platform@example.com
