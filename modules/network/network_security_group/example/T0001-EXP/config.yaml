@@ -4,25 +4,36 @@ environments:
   D0001-EMT:
     network:
       nsg:
-        app:
+        web-integration:
           security_rules:
-            allow_https_inbound:
+            sr-out-allow-database:
+              priority: 100
+              direction: Outbound
+              access: Allow
+              protocol: Tcp
+              source_port_range: "*"
+              destination_port_range: "1443"
+              source_address_prefix: AppService
+              destination_address_prefix: Sql
+        private_endpoint:
+          security_rules:
+            sr-in-allow-onprem:
               priority: 100
               direction: Inbound
               access: Allow
               protocol: Tcp
               source_port_range: "*"
               destination_port_range: "443"
-              source_address_prefix: Internet
-              destination_address_prefix: "*"
-        private_endpoint:
-          security_rules: {}
+              source_address_prefix: "10.0.0.0/8"
+              destination_address_prefix: "10.10.2.0/24"
     vnet:
+      address_space:
+        - 10.10.0.0/16
       subnets:
         sn-web-integration:
           address_prefixes:
             - 10.10.1.0/24
-          nsg_key: app
+          nsg_key: web-integration
         sn-private-endpoint:
           address_prefixes:
             - 10.10.2.0/24
